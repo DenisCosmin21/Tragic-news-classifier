@@ -16,7 +16,8 @@ return new class extends Migration
                 ->unique()
                 ->autoIncrement();
 
-            $table->string('domain_name', 64);
+            $table->string('domain_name', 64)
+                ->unique();
 
             $table->decimal('score', 8, 2);
 
