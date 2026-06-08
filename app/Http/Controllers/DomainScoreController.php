@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\DomainScoreClass;
 use App\Services\DomainScoreService;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -23,9 +24,9 @@ class DomainScoreController extends Controller
 
         $score = $this->domainScoreService->getDomainScore($domain);
 
-        if(!$score)
+        if($score == DomainScoreClass::UNEXISTENT)
             return response()->json([]);
 
-        return response()->json(["score" => $score]);
+        return response()->json(['class' => $score->value]);
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Enums\DomainScoreClass;
 use App\Repositories\DomainScoresRepository;
 use Illuminate\Support\Facades\Log;
 
@@ -13,9 +14,11 @@ class DomainScoreService
     {
     }
 
-    public function getDomainScore(string $domain): ?float
+    public function getDomainScore(string $domain): DomainScoreClass
     {
-        return $this->domainScoresRepository->getScore($domain);
+        $score = $this->domainScoresRepository->getScore($domain);
+
+        return DomainScoreClass::fromScore($score);
     }
 
     private function getMainDomain(string $domain): string
