@@ -21,7 +21,7 @@ return new class extends Migration
 
             $table->decimal('score', 8, 2);
 
-            $table->index('domain_name')->algorithm('hash');
+            $table->index('domain_name');
         });
     }
 
