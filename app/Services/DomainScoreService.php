@@ -14,11 +14,14 @@ class DomainScoreService
     {
     }
 
-    public function getDomainScore(string $domain): DomainScoreClass
+    public function getDomainScore(string $domain): array
     {
         $score = $this->domainScoresRepository->getScore($domain);
 
-        return DomainScoreClass::fromScore($score);
+        return [
+            'class' => DomainScoreClass::fromScore($score),
+            'score' => $score
+        ];
     }
 
     private function getMainDomain(string $domain): string

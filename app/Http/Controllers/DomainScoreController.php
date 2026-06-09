@@ -22,11 +22,11 @@ class DomainScoreController extends Controller
         if(!$domain)
             return response()->json(['error' => 'Bad request'], 400);
 
-        $score = $this->domainScoreService->getDomainScore($domain);
+        $scoreResponse = $this->domainScoreService->getDomainScore($domain);
 
-        if($score == DomainScoreClass::UNEXISTENT)
+        if($scoreResponse['class'] == DomainScoreClass::UNEXISTENT)
             return response()->json([]);
 
-        return response()->json(['class' => $score->value]);
+        return response()->json($scoreResponse);
     }
 }
